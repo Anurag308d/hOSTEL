@@ -1,0 +1,53 @@
+CREATE TABLE STUDENT_MAIN_INFORMATION (
+    roll_no INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    address VARCHAR(100),
+    gender VARCHAR(10) NOT NULL,
+    category VARCHAR(20) NOT NULL,
+    dept VARCHAR(50) NOT NULL,
+    prog VARCHAR(20) NOT NULL,
+    mobile VARCHAR(15),
+    email_id VARCHAR(50)
+);
+
+
+
+CREATE TABLE HOSTEL_INFORMATION (
+    hostel_occupancy_id INT PRIMARY KEY,
+    room_no VARCHAR(10) NOT NULL,
+    roll_no INT,
+    check_in DATE,
+    check_out DATE,
+    FOREIGN KEY (roll_no) REFERENCES STUDENT_MAIN_INFORMATION(roll_no)
+);
+
+
+CREATE TABLE OTHER_FINE_INFORMATION (
+    fine_id INT PRIMARY KEY,
+    roll_no INT,
+    type_of_fine VARCHAR(20) NOT NULL,
+    amount_payable DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (roll_no) REFERENCES STUDENT_MAIN_INFORMATION(roll_no)
+);
+
+
+CREATE TABLE DUES_INFORMATION (
+    roll_no INT PRIMARY KEY,
+    mess_dues DECIMAL(10, 2),
+    fees_due DECIMAL(10, 2),
+    fines_due DECIMAL(10, 2),
+    total_dues DECIMAL(10, 2),
+    FOREIGN KEY (roll_no) REFERENCES STUDENT_MAIN_INFORMATION(roll_no)
+);
+
+
+
+CREATE TABLE PAYMENT_RECORDS (
+    payment_id INT PRIMARY KEY,
+    pay_type VARCHAR(20) NOT NULL,
+    pay_name VARCHAR(50),
+    roll_no INT,
+    date DATE,
+    amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (roll_no) REFERENCES STUDENT_MAIN_INFORMATION(roll_no)
+);
